@@ -22,15 +22,15 @@ export function useImageEditor(imageId: string) {
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const data = imageData.data;
 
-    // Apply filters to each pixel
+    
     for (let i = 0; i < data.length; i += 4) {
-      // Brightness
+      
       const brightnessMultiplier = filters.brightness / 100;
       data[i] *= brightnessMultiplier;     // Red
       data[i + 1] *= brightnessMultiplier; // Green
       data[i + 2] *= brightnessMultiplier; // Blue
 
-      // Contrast
+      
       const contrast = (filters.contrast - 100) * 2.55;
       const factor = (259 * (contrast + 255)) / (255 * (259 - contrast));
       data[i] = factor * (data[i] - 128) + 128;
