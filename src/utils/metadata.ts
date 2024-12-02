@@ -12,7 +12,7 @@ export async function extractMetadata(file: File): Promise<ImageMetadata> {
       created: file.lastModified ? new Date(file.lastModified).toISOString() : undefined,
     };
 
-    // Create image to get dimensions
+    
     const img = new Image();
     const dimensionsPromise = new Promise<{ width: number; height: number }>((resolve) => {
       img.onload = () => {
