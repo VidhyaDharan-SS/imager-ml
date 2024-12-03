@@ -70,7 +70,6 @@ fabric.Image.filters.Vignette = fabric.util.createClass(
   }
 );
 
-// Custom Dramatic Filter
 fabric.Image.filters.Dramatic = fabric.util.createClass(
   fabric.Image.filters.BaseFilter,
   {
