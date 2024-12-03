@@ -12,6 +12,7 @@ export function TagManager() {
   const [selectedCategory, setSelectedCategory] = useState<string>('Other');
   const [showSuggestions, setShowSuggestions] = useState(false);
 
+  
   const categories = ['Nature', 'People', 'Objects', 'Other'];
 
   const handleCreateTag = () => {
