@@ -1,11 +1,11 @@
 import { fabric } from 'fabric';
 
-// Register custom filter namespace if it doesn't exist
+
 if (!fabric.Image.filters) {
   fabric.Image.filters = {};
 }
 
-// Custom Vignette Filter
+
 fabric.Image.filters.Vignette = fabric.util.createClass(
   fabric.Image.filters.BaseFilter,
   {
