@@ -124,7 +124,7 @@ fabric.Image.filters.Dramatic = fabric.util.createClass(
           );
         }
 
-        // Add blue tint to shadows
+       
         const luminance = (data[i] + data[i + 1] + data[i + 2]) / 3;
         if (luminance < 128) {
           data[i + 2] = Math.min(255, data[i + 2] + intensity * 50);
@@ -146,7 +146,7 @@ fabric.Image.filters.Dramatic = fabric.util.createClass(
   }
 );
 
-// Custom Vintage Filter
+
 fabric.Image.filters.Vintage = fabric.util.createClass(
   fabric.Image.filters.BaseFilter,
   {
@@ -228,7 +228,7 @@ fabric.Image.filters.Vintage = fabric.util.createClass(
   }
 );
 
-// Custom Vibrant Filter
+
 fabric.Image.filters.Vibrant = fabric.util.createClass(
   fabric.Image.filters.BaseFilter,
   {
@@ -304,9 +304,9 @@ fabric.Image.filters.Vibrant = fabric.util.createClass(
   }
 );
 
-// Initialize all custom filters
+
 export const initializeCustomFilters = () => {
-  // Register WebGL shaders for each filter
+
   Object.values(fabric.Image.filters).forEach((filter: any) => {
     if (filter.prototype instanceof fabric.Image.filters.BaseFilter) {
       fabric.filterBackend?.initFilters([filter]);
