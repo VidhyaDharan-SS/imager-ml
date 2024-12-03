@@ -23,7 +23,7 @@ function App() {
       } shadow-md p-4`}>
         <div className="container mx-auto flex justify-between items-center">
           {/* Zoho logo added before ImagerML text */}
-          <img src="/zoho-logo.png" alt="Zoho Logo" className="h-8 mr-4" />
+          <img src="/zoho-logo_brandlogos.net_kduhg.png" alt="Zoho Logo" className="h-8 mr-4" />
           
           <h1 className="text-2xl font-bold text-purple-600 dark:text-purple-400">
             ImagerML
