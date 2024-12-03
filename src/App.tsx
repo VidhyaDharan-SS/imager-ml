@@ -24,24 +24,33 @@ function App() {
         } shadow-md p-4`}
       >
         <div className="container mx-auto flex justify-between items-center">
-          {/* Custom styled Zoho text */}
+          {/* Custom styled QUICKML text */}
           <div className="flex items-center space-x-1">
             <span className="text-white bg-red-600 p-2 text-lg font-bold rounded-md">
-              Z
+              Q
             </span>
             <span className="text-white bg-blue-600 p-2 text-lg font-bold rounded-md">
-              O
+              U
             </span>
             <span className="text-white bg-green-600 p-2 text-lg font-bold rounded-md">
-              H
+              I
             </span>
             <span className="text-white bg-yellow-500 p-2 text-lg font-bold rounded-md">
-              O
+              C
+            </span>
+            <span className="text-white bg-purple-600 p-2 text-lg font-bold rounded-md">
+              K
+            </span>
+            <span className="text-white bg-orange-500 p-2 text-lg font-bold rounded-md">
+              M
+            </span>
+            <span className="text-white bg-teal-600 p-2 text-lg font-bold rounded-md">
+              L
             </span>
           </div>
 
           <h1 className="text-2xl font-bold text-purple-600 dark:text-purple-400 ml-4">
-            ImagerML
+            QUICKML
           </h1>
 
           <div className="flex items-center space-x-4">
@@ -59,7 +68,7 @@ function App() {
               Gallery View
             </button>
             <button className="px-4 py-2 rounded-md bg-purple-500 text-white hover:bg-purple-600 transition-colors">
-              ImagerML Editor
+              QUICKML Editor
             </button>
           </div>
         </div>
@@ -72,7 +81,7 @@ function App() {
           } rounded-lg shadow-lg p-6 mb-8`}
         >
           <h2 className="text-lg text-center mb-4">
-            ImagerML is an all-in-one platform for image uploading, editing,
+            QUICKML is an all-in-one platform for image uploading, editing,
             tagging, compressing, streaming, filtering, and management with
             real-time collaboration and easy saving.
           </h2>
