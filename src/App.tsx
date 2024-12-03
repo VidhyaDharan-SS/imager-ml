@@ -22,9 +22,13 @@ function App() {
         theme === 'dark' ? 'bg-gray-800' : 'bg-white'
       } shadow-md p-4`}>
         <div className="container mx-auto flex justify-between items-center">
+          {/* Zoho logo added before ImagerML text */}
+          <img src="/zoho-logo.png" alt="Zoho Logo" className="h-8 mr-4" />
+          
           <h1 className="text-2xl font-bold text-purple-600 dark:text-purple-400">
             ImagerML
           </h1>
+
           <div className="flex items-center space-x-4">
             <button
               onClick={toggleTheme}
@@ -52,7 +56,7 @@ function App() {
         } rounded-lg shadow-lg p-6 mb-8`}>
           <h2 className="text-lg text-center mb-4">
             ImagerML is an all-in-one platform for image uploading, editing, tagging,
-            compressing, streaming,filtering, and management with real-time collaboration
+            compressing, streaming, filtering, and management with real-time collaboration
             and easy saving.
           </h2>
           <ImageUpload />
