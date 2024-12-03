@@ -52,7 +52,7 @@ function App() {
         } rounded-lg shadow-lg p-6 mb-8`}>
           <h2 className="text-lg text-center mb-4">
             ImagerML is an all-in-one platform for image uploading, editing, tagging,
-            compressing, streaming filtering, and management with real-time collaboration
+            compressing, streaming,filtering, and management with real-time collaboration
             and easy saving.
           </h2>
           <ImageUpload />
