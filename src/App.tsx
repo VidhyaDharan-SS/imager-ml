@@ -24,9 +24,9 @@ function App() {
         } shadow-md p-4`}
       >
         <div className="container mx-auto flex justify-between items-center">
-          {/* QUICKML text */}
+          {}
           <h1 className="text-2xl font-bold text-purple-600 dark:text-purple-400 ml-4">
-            QUICKML
+            ImagerML
           </h1>
 
           <div className="flex items-center space-x-4">
