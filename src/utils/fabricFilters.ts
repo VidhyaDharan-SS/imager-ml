@@ -207,7 +207,7 @@ fabric.Image.filters.Vintage = fabric.util.createClass(
         );
         data[i + 2] = Math.min(255, r * 0.272 + g * 0.534 + b * 0.131);
 
-        // Yellow tint
+      
         if (intensity > 0.5) {
           data[i] = Math.min(255, data[i] + intensity * 25);
           data[i + 1] = Math.min(255, data[i + 1] + intensity * 12);
