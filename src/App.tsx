@@ -15,7 +15,7 @@ function App() {
 
   return (
     <div className={`min-h-screen transition-colors duration-200 ${
-      theme === 'dark' a
+      theme === 'dark'
         ? 'bg-gray-900 text-white' 
         : 'bg-pink-50 text-gray-900'
     }`}>
