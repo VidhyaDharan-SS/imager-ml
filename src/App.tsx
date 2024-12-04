@@ -5,7 +5,7 @@ import { ImageUpload } from './components/ImageUpload';
 import { ImageGallery } from './components/ImageGallery';
 import { ImageEditor } from './components/editor/ImageEditor';
 import { useImageStore } from './store/imageStore';
-import { ThemeToggle } from './components/ThemeToggle';
+// Removed ThemeToggle import
 import { TutorialButton } from './components/TutorialButton';
 import { useTheme } from './hooks/useTheme';
 
@@ -27,7 +27,7 @@ function App() {
             ImagerML
           </h1>
           <div className="flex items-center space-x-4">
-            <ThemeToggle />
+            {/* Removed ThemeToggle usage */}
             <button className="px-4 py-2 rounded-md bg-purple-500 text-white hover:bg-purple-600 transition-colors">
               Gallery View
             </button>
