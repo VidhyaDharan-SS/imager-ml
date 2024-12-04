@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Grid, List, Search, Tag, Play, FileDown, Edit2, Filter, CheckSquare } from 'lucide-react';
+import { Grid, List, Search, Tag, Play, FileDown, Edit2, Filter, CheckSquare, Trash } from 'lucide-react';
 import { useImageStore } from '../store/imageStore';
 import { TagManager } from './TagManager';
 import { SearchAndSort } from './SearchAndSort';
@@ -10,7 +10,7 @@ import { format } from 'date-fns';
 
 export function ImageGallery() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const { getFilteredAndSortedImages, setSelectedImage } = useImageStore();
+  const { getFilteredAndSortedImages, setSelectedImage, removeImage } = useImageStore();
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [showBatchOperations, setShowBatchOperations] = useState(false);
   const [showSingleEditor, setShowSingleEditor] = useState(false);
@@ -26,7 +26,7 @@ export function ImageGallery() {
   };
 
   const handleImageSelect = (id: string) => {
-    setSelectedImages(prev => 
+    setSelectedImages(prev =>
       prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
     );
   };
@@ -34,6 +34,11 @@ export function ImageGallery() {
   const handleBatchOperation = (mode: 'edit' | 'compress' | 'stream') => {
     setCurrentEditMode(mode);
     setShowBatchOperations(true);
+  };
+
+  const handleDeleteSelectedImages = () => {
+    selectedImages.forEach(id => removeImage(id));
+    setSelectedImages([]); // Clear the selected images after deletion
   };
 
   const viewControls = [
@@ -200,6 +205,12 @@ export function ImageGallery() {
             Stream All ({selectedImages.length})
           </button>
           <button 
+            onClick={handleDeleteSelectedImages}
+            className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+          >
+            Delete All ({selectedImages.length})
+          </button>
+          <button
             onClick={() => setSelectedImages([])}
             className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
           >
