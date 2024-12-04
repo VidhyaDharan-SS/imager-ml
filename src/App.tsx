@@ -5,13 +5,13 @@ import { ImageUpload } from './components/ImageUpload';
 import { ImageGallery } from './components/ImageGallery';
 import { ImageEditor } from './components/editor/ImageEditor';
 import { useImageStore } from './store/imageStore';
-// Removed ThemeToggle import
 import { TutorialButton } from './components/TutorialButton';
 import { useTheme } from './hooks/useTheme';
+import { Sun, Moon } from 'lucide-react';
 
 function App() {
   const selectedImage = useImageStore((state) => state.selectedImage);
-  const { theme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <div className={`min-h-screen transition-colors duration-200 ${
@@ -27,7 +27,16 @@ function App() {
             ImagerML
           </h1>
           <div className="flex items-center space-x-4">
-            {/* Removed ThemeToggle usage */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              {theme === 'dark' ? (
+                <Sun className="h-5 w-5" />
+              ) : (
+                <Moon className="h-5 w-5" />
+              )}
+            </button>
             <button className="px-4 py-2 rounded-md bg-purple-500 text-white hover:bg-purple-600 transition-colors">
               Gallery View
             </button>
