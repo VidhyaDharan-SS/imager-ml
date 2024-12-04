@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useInterval } from 'react-use';
-import { Play, Pause, Settings, RefreshCw, SkipForward, SkipBack } from 'lucide-react';
+import { Play, Pause, Settings, RefreshCw, SkipForward, SkipBack, Clock } from 'lucide-react';
 import { ImageFile } from '../../types';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -16,6 +16,7 @@ export function ProgressiveStream({ image }: ProgressiveStreamProps) {
   const [currentBlob, setCurrentBlob] = useState<string | null>(null);
   const [currentStep, setCurrentStep] = useState(0);
   const [autoRestart, setAutoRestart] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
 
   useInterval(
     () => {
@@ -79,100 +80,131 @@ export function ProgressiveStream({ image }: ProgressiveStreamProps) {
           Progressive Streaming
         </h3>
 
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex space-x-2">
-            <button
-              onClick={() => handleStep('back')}
-              disabled={currentStep === 0}
-              className="p-2 rounded bg-gray-100 dark:bg-gray-700 disabled:opacity-50"
-            >
-              <SkipBack className="h-4 w-4" />
-            </button>
-            <button
-              onClick={handlePlayPause}
-              className="flex items-center px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600"
-            >
-              {isPlaying ? (
-                <>
-                  <Pause className="h-4 w-4 mr-2" />
-                  Pause
-                </>
-              ) : (
-                <>
-                  <Play className="h-4 w-4 mr-2" />
-                  Play
-                </>
-              )}
-            </button>
-            <button
-              onClick={() => handleStep('forward')}
-              disabled={currentStep === loadedChunks.length - 1}
-              className="p-2 rounded bg-gray-100 dark:bg-gray-700 disabled:opacity-50"
-            >
-              <SkipForward className="h-4 w-4" />
-            </button>
-          </div>
-
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
-              <Settings className="h-4 w-4 text-gray-500" />
-              <input
-                type="number"
-                value={interval}
-                onChange={(e) => setInterval(Number(e.target.value))}
-                className="w-20 px-2 py-1 border rounded"
-                min="100"
-                max="5000"
-                step="100"
-              />
-              <span className="text-sm text-gray-500">ms</span>
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="flex space-x-2">
+              <button
+                onClick={() => handleStep('back')}
+                disabled={currentStep === 0}
+                className="p-2 rounded bg-gray-100 dark:bg-gray-700 disabled:opacity-50"
+              >
+                <SkipBack className="h-4 w-4" />
+              </button>
+              <button
+                onClick={handlePlayPause}
+                className="flex items-center px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600"
+              >
+                {isPlaying ? (
+                  <>
+                    <Pause className="h-4 w-4 mr-2" />
+                    Pause
+                  </>
+                ) : (
+                  <>
+                    <Play className="h-4 w-4 mr-2" />
+                    Play
+                  </>
+                )}
+              </button>
+              <button
+                onClick={() => handleStep('forward')}
+                disabled={currentStep === loadedChunks.length - 1}
+                className="p-2 rounded bg-gray-100 dark:bg-gray-700 disabled:opacity-50"
+              >
+                <SkipForward className="h-4 w-4" />
+              </button>
             </div>
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={autoRestart}
-                onChange={(e) => setAutoRestart(e.target.checked)}
-                className="rounded border-gray-300"
+
+            <button
+              onClick={() => setShowSettings(!showSettings)}
+              className="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <Settings className="h-4 w-4" />
+            </button>
+          </div>
+
+          <AnimatePresence>
+            {showSettings && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                className="space-y-3 pt-3 border-t"
+              >
+                <div className="flex items-center space-x-4">
+                  <div className="flex-1">
+                    <label className="block text-sm font-medium mb-1">
+                      Interval (ms)
+                    </label>
+                    <input
+                      type="number"
+                      value={interval}
+                      onChange={(e) => setInterval(Number(e.target.value))}
+                      className="w-full px-3 py-2 border rounded"
+                      min="100"
+                      max="5000"
+                      step="100"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <label className="block text-sm font-medium mb-1">
+                      Auto Restart
+                    </label>
+                    <div className="flex items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        checked={autoRestart}
+                        onChange={(e) => setAutoRestart(e.target.checked)}
+                        className="rounded border-gray-300"
+                      />
+                      <span className="text-sm">Enable</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <div className="space-y-2">
+            <div className="flex justify-between text-sm">
+              <span>Loading Quality</span>
+              <span>{quality}%</span>
+            </div>
+            <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded overflow-hidden">
+              <motion.div
+                className="h-full bg-purple-500"
+                initial={{ width: 0 }}
+                animate={{ width: `${quality}%` }}
+                transition={{ duration: 0.3 }}
               />
-              <span className="text-sm">Auto Restart</span>
-            </label>
+            </div>
           </div>
-        </div>
 
-        <div className="space-y-2">
-          <div className="flex justify-between text-sm">
-            <span>Loading Quality</span>
-            <span>{quality}%</span>
-          </div>
-          <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded overflow-hidden">
+          <AnimatePresence mode="wait">
             <motion.div
-              className="h-full bg-purple-500"
-              initial={{ width: 0 }}
-              animate={{ width: `${quality}%` }}
-              transition={{ duration: 0.3 }}
-            />
+              key={quality}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="mt-4 aspect-video bg-gray-100 dark:bg-gray-900 rounded-lg overflow-hidden"
+            >
+              <img
+                src={currentBlob || image.preview}
+                alt="Preview"
+                className="w-full h-full object-contain"
+                style={{
+                  filter: `blur(${(100 - quality) / 10}px)`,
+                  transition: 'filter 0.3s ease-out',
+                }}
+              />
+            </motion.div>
+          </AnimatePresence>
+
+          <div className="text-sm text-gray-500 dark:text-gray-400">
+            <Clock className="h-4 w-4 inline mr-1" />
+            Time remaining: {Math.ceil((100 - quality) * interval / 1000)}s
           </div>
         </div>
-
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={quality}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="mt-4 aspect-video bg-gray-100 dark:bg-gray-900 rounded-lg overflow-hidden"
-          >
-            <img
-              src={currentBlob || image.preview}
-              alt="Preview"
-              className="w-full h-full object-contain"
-              style={{
-                filter: `blur(${(100 - quality) / 10}px)`,
-                transition: 'filter 0.3s ease-out',
-              }}
-            />
-          </motion.div>
-        </AnimatePresence>
       </div>
     </div>
   );
